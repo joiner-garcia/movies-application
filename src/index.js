@@ -84,10 +84,27 @@ $(document).ready(() => {
     $('#addButton').click(() => {
         modalLabel().html('Add Movie');
     });
-
-    $('#editButton').click(() => {
+    $('#editButton1').click(() => {
         modalLabel().html('Edit Movie');
     });
+
+    // $('[id^="editButton"]').click(modalLabel().html('Edit Movie'));
+
+    // $('[id^="deleteButton"]').click(modalLabel().html('Delete Movie'));
+
+    // function editLabel() {
+    //     modalLabel().html('Edit Movie')
+    // }
+    // $("#editButton1").on('click', editLabel);
+
+    function deleteLabel() {
+        $('#modalLabel').html('Delete Movie')
+    }
+    $(".delete-button").on('click', deleteLabel);
+
+
+
+
 
     $("#saveInput").click(function () {
         console.log(modalLabel().html());
