@@ -16,13 +16,16 @@ $(document).ready(() => {
     let mainContainer = () => {
         return $("main");
     };
-    let modalLabel = () => {
-        return $("#modalLabel");
-    };
+    // let modalLabel = () => {
+    //     return $("#modalLabel");
+    // };
 
     let titleInput = () => {
         return $("#titleInput");
     };
+
+    let modalLabel = '';
+
 
     $("main").html("loading...");
 
@@ -48,6 +51,8 @@ $(document).ready(() => {
         content += `</div>`;
         content += `</div>`;
         content += `</div>`;
+
+
         return content
     };
 
@@ -57,6 +62,21 @@ $(document).ready(() => {
             mainContainer().append(`<div id="accordion">`);
             movieList.forEach(({title, rating, id}) => {
                 $("#accordion").append(renderMovieList(title, rating, id));
+                function editLabel() {
+                    modalLabel = 'Edit Movie';
+                    console.log(modalLabel);
+                    $('#modalLabel').html(modalLabel)
+                    // modalLabel().html('Edit Movie')
+                }
+                $(".edit-button").click(editLabel);
+
+                function deleteLabel() {
+                    modalLabel = 'Delete Movie';
+                    console.log(modalLabel);
+                    $('#modalLabel').html(modalLabel)
+                    // modalLabel().html('Edit Movie')
+                }
+                $(".delete-button").click(deleteLabel);
             });
             mainContainer().append(`</div>`);
         }).catch((error) => {
@@ -82,27 +102,8 @@ $(document).ready(() => {
     renderList();
 
     $('#addButton').click(() => {
-        modalLabel().html('Add Movie');
+        $('#modalLabel').html('Add Movie');
     });
-    $('#editButton1').click(() => {
-        modalLabel().html('Edit Movie');
-    });
-
-    // $('[id^="editButton"]').click(modalLabel().html('Edit Movie'));
-
-    // $('[id^="deleteButton"]').click(modalLabel().html('Delete Movie'));
-
-    // function editLabel() {
-    //     modalLabel().html('Edit Movie')
-    // }
-    // $("#editButton1").on('click', editLabel);
-
-    function deleteLabel() {
-        $('#modalLabel').html('Delete Movie')
-    }
-    $(".delete-button").on('click', deleteLabel);
-
-
 
 
 
