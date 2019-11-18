@@ -9,7 +9,7 @@ import $ from 'jquery';
 /**
  * require style imports
  */
-import {getMovies, postMovie, putMovie} from './api'
+import {getMovies, postMovie, putMovie, deleteMovie} from './api'
 
 $(document).ready(() => {
 
@@ -25,6 +25,7 @@ $(document).ready(() => {
     };
 
     let modalLabel = '';
+    let movieCard;
 
 
     $("main").html("loading...");
@@ -42,10 +43,10 @@ $(document).ready(() => {
         content += `<div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#accordian">`;
         content += `<div class="movie-content-container card-body">`;
         content += `<div class="movie-description">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>`;
-        content += `<button type="button" id="editButton${id}" class="edit-button btn btn-primary btn-sm" data-toggle="modal" data-target="#modal">
+        content += `<button type="button" id="editButton-${id}" class="edit-button btn btn-primary btn-sm" data-toggle="modal" data-target="#modal">
                     Edit
                 </button>`;
-        content += `<button type="button" id="deleteButton${id}" class="delete-button btn btn-danger btn-sm" data-toggle="modal" data-target="#modal">
+        content += `<button type="button" id="deleteButton-${id}" class="delete-button btn btn-danger btn-sm" data-toggle="modal" data-target="#modal">
                     Delete
                 </button>`;
         content += `</div>`;
@@ -82,6 +83,8 @@ $(document).ready(() => {
           function editLabel() {
             modalLabel = 'Edit Movie';
             console.log(modalLabel);
+            movieCard = $(this).attr("id").split("-")[1];
+            console.log(movieCard);
             $('#modalLabel').html(modalLabel)
             // modalLabel().html('Edit Movie')
           }
@@ -90,6 +93,8 @@ $(document).ready(() => {
           function deleteLabel() {
             modalLabel = 'Delete Movie';
             console.log(modalLabel);
+            movieCard = $(this).attr("id").split("-")[1];
+            console.log(movieCard);
             $('#modalLabel').html(modalLabel)
             // modalLabel().html('Edit Movie')
           }
@@ -152,6 +157,17 @@ $(document).ready(() => {
         } else if ($("#modalLabel").html() === "Edit Movie"){
           console.log("We're editing");
 
+          let something = {
+            "title": titleInput().val(),
+            "rating": $("#ratingInput").val()
+          };
+          let date = new Date();
+          let udate = date.toLocaleString();
+          console.log(udate);
+
+          putMovie(something,movieCard)
+              .then((renderList(`Movie list updated: ${udate}`)));
+
             // let something = {
             //     "title": $("#titleInput").val(),
             //     "rating": $("#ratingInput").val()
@@ -169,6 +185,13 @@ $(document).ready(() => {
             //     alert('Oh no! Something went wrong.\nCheck the console for details.');
             //     console.log(error);
             // });
+        } else if ($("#modalLabel").html() === "Delete Movie") {
+          let date = new Date();
+          let udate = date.toLocaleString();
+          console.log(udate);
+
+          deleteMovie(movieCard)
+              .then((renderList(`Movie list updated: ${udate}`)));
         }
     });
 });
