@@ -20,5 +20,13 @@ module.exports = {
       },
       body: JSON.stringify(movie),
     })
+  },
+  deleteMovie : (id) => {
+    return fetch(`api/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
   }
 };
