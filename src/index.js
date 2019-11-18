@@ -62,7 +62,21 @@ $(document).ready(() => {
             mainContainer().append(`<div id="accordion">`);
             movieList.forEach(({title, rating, id}) => {
                 $("#accordion").append(renderMovieList(title, rating, id));
+
+                function editLabel() {
+                    modalLabel = 'Edit Movie';
+                    $('#modalLabel').html(modalLabel)
+                }
+                $(".edit-button").click(editLabel);
+
+                function deleteLabel() {
+                    modalLabel = 'Delete Movie';
+                    $('#modalLabel').html(modalLabel)
+                }
+                $(".delete-button").click(deleteLabel);
+
             //    placeholder if all else fails
+
             });
             mainContainer().append(`</div>`);
           function editLabel() {
