@@ -62,6 +62,7 @@ $(document).ready(() => {
             mainContainer().append(`<div id="accordion">`);
             movieList.forEach(({title, rating, id}) => {
                 $("#accordion").append(renderMovieList(title, rating, id));
+
                 function editLabel() {
                     modalLabel = 'Edit Movie';
                     $('#modalLabel').html(modalLabel)
@@ -73,8 +74,26 @@ $(document).ready(() => {
                     $('#modalLabel').html(modalLabel)
                 }
                 $(".delete-button").click(deleteLabel);
+
+            //    placeholder if all else fails
+
             });
             mainContainer().append(`</div>`);
+          function editLabel() {
+            modalLabel = 'Edit Movie';
+            console.log(modalLabel);
+            $('#modalLabel').html(modalLabel)
+            // modalLabel().html('Edit Movie')
+          }
+          $(".edit-button").click(editLabel);
+
+          function deleteLabel() {
+            modalLabel = 'Delete Movie';
+            console.log(modalLabel);
+            $('#modalLabel').html(modalLabel)
+            // modalLabel().html('Edit Movie')
+          }
+          $(".delete-button").click(deleteLabel);
         }).catch((error) => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
             console.log(error);
@@ -101,11 +120,9 @@ $(document).ready(() => {
         $('#modalLabel').html('Add Movie');
     });
 
-
-
     $("#saveInput").click(function () {
-        console.log(modalLabel().html());
-        if (modalLabel().html() === "Add Movie") {
+        // console.log(modalLabel().html());
+        if ($("#modalLabel").html() === "Add Movie") {
             console.log(titleInput().val());
             let something = {
                 "title": titleInput().val(),
@@ -132,24 +149,26 @@ $(document).ready(() => {
             //     alert('Oh no! Something went wrong.\nCheck the console for details.');
             //     console.log(error);
             // });
-        } else {
-            let something = {
-                "title": $("#titleInput").val(),
-                "rating": $("#ratingInput").val()
-            };
-            putMovie(something)
-                .then(getMovies)
-                .then((movies) => {
-                    console.log('Here are all the movies:');
-                    $("main").html("Here are all the movies:");
-                    movies.forEach(({title, rating, id}) => {
-                        console.log(`id#${id} - ${title} - rating: ${rating}`);
-                        $("main").append(`${title} - rating: ${rating}`);
-                    });
-                }).catch((error) => {
-                alert('Oh no! Something went wrong.\nCheck the console for details.');
-                console.log(error);
-            });
+        } else if ($("#modalLabel").html() === "Edit Movie"){
+          console.log("We're editing");
+
+            // let something = {
+            //     "title": $("#titleInput").val(),
+            //     "rating": $("#ratingInput").val()
+            // };
+            // putMovie(something)
+            //     .then(getMovies)
+            //     .then((movies) => {
+            //         console.log('Here are all the movies:');
+            //         $("main").html("Here are all the movies:");
+            //         movies.forEach(({title, rating, id}) => {
+            //             console.log(`id#${id} - ${title} - rating: ${rating}`);
+            //             $("main").append(`${title} - rating: ${rating}`);
+            //         });
+            //     }).catch((error) => {
+            //     alert('Oh no! Something went wrong.\nCheck the console for details.');
+            //     console.log(error);
+            // });
         }
     });
 });
