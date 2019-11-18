@@ -64,17 +64,13 @@ $(document).ready(() => {
                 $("#accordion").append(renderMovieList(title, rating, id));
                 function editLabel() {
                     modalLabel = 'Edit Movie';
-                    console.log(modalLabel);
                     $('#modalLabel').html(modalLabel)
-                    // modalLabel().html('Edit Movie')
                 }
                 $(".edit-button").click(editLabel);
 
                 function deleteLabel() {
                     modalLabel = 'Delete Movie';
-                    console.log(modalLabel);
                     $('#modalLabel').html(modalLabel)
-                    // modalLabel().html('Edit Movie')
                 }
                 $(".delete-button").click(deleteLabel);
             });
