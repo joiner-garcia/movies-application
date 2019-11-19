@@ -40,7 +40,8 @@ $(document).ready(() => {
         content += `</button>`;
         content += `</h5>`;
         content += `</div>`;
-        content += `<div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#accordian">`;
+        // content += `<div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#accordian">`;
+        content += `<div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#myGroup">`;
         content += `<div class="movie-content-container card-body">`;
         content += `<div class="movie-description">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>`;
         content += `<button type="button" id="editButton-${id}" class="edit-button btn btn-warning btn-sm" data-toggle="modal" data-target="#modal">
@@ -73,7 +74,7 @@ $(document).ready(() => {
             console.log(modalLabel);
             movieCard = $(this).attr("id").split("-")[1];
             console.log(movieCard);
-            $('#modalLabel').html(modalLabel)
+            $('#modalLabel').html(modalLabel);
             $('.modal-body').html(`<form>
                             <div class="form-group">
                                 <label for="titleInput" class="col-form-label">Title:</label>
@@ -83,7 +84,7 @@ $(document).ready(() => {
                                 <label for="ratingInput" class="col-form-label">Rating:</label>
                                 <input type="text" class="form-control" id="ratingInput">
                             </div>
-                        </form>`)
+                        </form>`);
               $('#saveInput').removeClass('btn-danger btn-success').addClass('btn-warning').html('Save Edit')
             // modalLabel().html('Edit Movie')
           }
