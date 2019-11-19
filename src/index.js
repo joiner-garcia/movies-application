@@ -26,6 +26,9 @@ $(document).ready(() => {
 
     let modalLabel = '';
     let movieCard;
+    let allMovies = [];
+    let selectedTitle = '';
+    let selectedRating;
 
   // $("main").html("loading...");
   $("main").html(`<div id="loader-container"><img class="loaderImage" src="img/editLoader.gif"></div>`);
@@ -59,6 +62,8 @@ $(document).ready(() => {
 
     const renderList = (title = "Here are all the movies") => {
         getMovies().then((movieList) => {
+          allMovies = movieList;
+          console.log(allMovies);
           setTimeout(() => {
             mainContainer().html(title);
             mainContainer().append(`<div id="accordion">`);
@@ -71,7 +76,14 @@ $(document).ready(() => {
                 modalLabel = 'Edit Movie';
                 console.log(modalLabel);
                 movieCard = $(this).attr("id").split("-")[1];
-                console.log(movieCard);
+                for (let movie of allMovies) {
+                  if (parseInt(movieCard) === movie.id) {
+                    selectedTitle = movie.title;
+                    selectedRating = movie.rating;
+                  }
+                }
+
+                // console.log(parseInt(movieCard));
                 $('#modalLabel').html(modalLabel);
                 $('.modalOne').html(`<form>
                             <div class="form-group">
@@ -85,6 +97,8 @@ $(document).ready(() => {
                         </form>`);
                 $('#saveInput').removeClass('btn-danger btn-success').addClass('btn-warning').html('Save Edit')
                 // modalLabel().html('Edit Movie')
+              $("#titleInput").val(selectedTitle);
+              $("#ratingInput").val(selectedRating);
             }
             $(".edit-button").click(editLabel);
 
@@ -99,7 +113,7 @@ $(document).ready(() => {
                 $('#saveInput').removeClass('btn-warning btn-success').addClass('btn-danger').html('Delete')
             }
             $(".delete-button").click(deleteLabel);
-          },4000);
+          },.5);
         }).catch((error) => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
             console.log(error);
