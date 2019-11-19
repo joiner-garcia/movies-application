@@ -9,38 +9,54 @@ html, body {
     text-align: center;
 }
 
+.jumbotron {
+    height: 8em;
+    background-image: url("img/movieFluid.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
+.movie-content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 3fr 2.5em;
+}
 
-/*.jumbotron {*/
-/*    height: 8em;*/
-/*}*/
+.movie-description {
+    grid-area: 1 / 1 / 2 / 6;
+}
 
-/*.movie-content-container {*/
-/*    display: grid;*/
-/*    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;*/
-/*    grid-template-rows: 3fr 2.5em;*/
-/*}*/
+.edit-button {
+    grid-area: 2 / 4 / 2 / 5;
+    /*margin: 1em 5px 0;*/
+    margin: 5px 5px;
+    height: 2em;
+    width: 4em;
+}
 
-/*.movie-description {*/
-/*    grid-area: 1 / 1 / 2 / 6;*/
-/*}*/
+.delete-button {
+    grid-area: 2 / 5 / 2 / 6;
+    /*margin: 1em 5px 0;*/
+    margin: 5px 5px;
+    height: 2em;
+    width: 4em;
+    text-align: center;
+}
 
-/*.edit-button {*/
-/*    grid-area: 2 / 4 / 2 / 5 ;*/
-/*    !*margin: 1em 5px 0;*!*/
-/*    margin: 5px 5px;*/
-/*    height: 2em;*/
-/*    width: 4em;*/
-/*}*/
+.navbar a {
+    margin-left: 3em;
+}
 
-/*.delete-button {*/
-/*    grid-area: 2 / 5 / 2 / 6 ;*/
-/*    !*margin: 1em 5px 0;*!*/
-/*    margin: 5px 5px;*/
-/*    height: 2em;*/
-/*    width: 4em;*/
-/*    text-align: center;*/
-/*}*/
+#loader-container {
+    display: flex;
+    justify-content: center;
+}
+
+.loaderImage {
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
+}
 
 /*!*Extra small devices (portrait phones, less than 576px)*!*/
 /*!*No media query for `xs` since this is the default in Bootstrap*!*/

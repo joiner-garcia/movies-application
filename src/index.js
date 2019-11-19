@@ -27,8 +27,8 @@ $(document).ready(() => {
     let modalLabel = '';
     let movieCard;
 
-
-    $("main").html("loading...");
+  // $("main").html("loading...");
+  $("main").html(`<div id="loader-container"><img class="loaderImage" src="img/editLoader.gif"></div>`);
 
     const renderMovieList = (title, rating, id) => {
         let content = `<div class="card">`;
@@ -59,23 +59,21 @@ $(document).ready(() => {
 
     const renderList = (title = "Here are all the movies") => {
         getMovies().then((movieList) => {
+          setTimeout(() => {
             mainContainer().html(title);
             mainContainer().append(`<div id="accordion">`);
             movieList.forEach(({title, rating, id}) => {
-                $("#accordion").append(renderMovieList(title, rating, id));
-
-
-            //    placeholder if all else fails
-
+              $("#accordion").append(renderMovieList(title, rating, id));
+              //    placeholder if all else fails
             });
             mainContainer().append(`</div>`);
-          function editLabel() {
-            modalLabel = 'Edit Movie';
-            console.log(modalLabel);
-            movieCard = $(this).attr("id").split("-")[1];
-            console.log(movieCard);
-            $('#modalLabel').html(modalLabel);
-            $('.modal-body').html(`<form>
+            function editLabel() {
+                modalLabel = 'Edit Movie';
+                console.log(modalLabel);
+                movieCard = $(this).attr("id").split("-")[1];
+                console.log(movieCard);
+                $('#modalLabel').html(modalLabel);
+                $('.modal-body').html(`<form>
                             <div class="form-group">
                                 <label for="titleInput" class="col-form-label">Title:</label>
                                 <input type="text" class="form-control" id="titleInput">
@@ -85,22 +83,23 @@ $(document).ready(() => {
                                 <input type="text" class="form-control" id="ratingInput">
                             </div>
                         </form>`);
-              $('#saveInput').removeClass('btn-danger btn-success').addClass('btn-warning').html('Save Edit')
-            // modalLabel().html('Edit Movie')
-          }
-          $(".edit-button").click(editLabel);
+                $('#saveInput').removeClass('btn-danger btn-success').addClass('btn-warning').html('Save Edit')
+                // modalLabel().html('Edit Movie')
+            }
+            $(".edit-button").click(editLabel);
 
-          function deleteLabel() {
-            modalLabel = 'Delete Movie';
-            console.log(modalLabel);
-            movieCard = $(this).attr("id").split("-")[1];
-            console.log(movieCard);
-            $('#modalLabel').html(modalLabel);
-            // modalLabel().html('Edit Movie')
-            $('.modal-body').html("Are you sure you want to delete this movie?");
-            $('#saveInput').removeClass('btn-warning btn-success').addClass('btn-danger').html('Delete')
-          }
-          $(".delete-button").click(deleteLabel);
+            function deleteLabel() {
+                modalLabel = 'Delete Movie';
+                console.log(modalLabel);
+                movieCard = $(this).attr("id").split("-")[1];
+                console.log(movieCard);
+                $('#modalLabel').html(modalLabel);
+                // modalLabel().html('Edit Movie')
+                $('.modal-body').html("Are you sure you want to delete this movie?");
+                $('#saveInput').removeClass('btn-warning btn-success').addClass('btn-danger').html('Delete')
+            }
+            $(".delete-button").click(deleteLabel);
+          },4000);
         }).catch((error) => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
             console.log(error);
@@ -135,7 +134,7 @@ $(document).ready(() => {
                                 <input type="text" class="form-control" id="ratingInput">
                             </div>
                         </form>`);
-        $('#saveInput').removeClass('btn-warning btn-danger').addClass('btn-success')
+        $('#saveInput').removeClass('btn-warning btn-danger').addClass('btn-success').html('Save Changes');
 
     });
 
@@ -168,18 +167,18 @@ $(document).ready(() => {
             //     alert('Oh no! Something went wrong.\nCheck the console for details.');
             //     console.log(error);
             // });
-        } else if ($("#modalLabel").html() === "Edit Movie"){
-          console.log("We're editing");
-          let something = {
-            "title": titleInput().val(),
-            "rating": $("#ratingInput").val()
-          };
-          let date = new Date();
-          let udate = date.toLocaleString();
-          console.log(udate);
+        } else if ($("#modalLabel").html() === "Edit Movie") {
+            console.log("We're editing");
+            let something = {
+                "title": titleInput().val(),
+                "rating": $("#ratingInput").val()
+            };
+            let date = new Date();
+            let udate = date.toLocaleString();
+            console.log(udate);
 
-          putMovie(something,movieCard)
-              .then((renderList(`Movie list updated: ${udate}`)));
+            putMovie(something, movieCard)
+                .then((renderList(`Movie list updated: ${udate}`)));
 
             // let something = {
             //     "title": $("#titleInput").val(),
@@ -199,11 +198,11 @@ $(document).ready(() => {
             //     console.log(error);
             // });
         } else if ($("#modalLabel").html() === "Delete Movie") {
-          let date = new Date();
-          let udate = date.toLocaleString();
-          console.log(udate);
-          deleteMovie(movieCard)
-              .then((renderList(`Movie list updated: ${udate}`)));
+            let date = new Date();
+            let udate = date.toLocaleString();
+            console.log(udate);
+            deleteMovie(movieCard)
+                .then((renderList(`Movie list updated: ${udate}`)));
         }
     });
 });
