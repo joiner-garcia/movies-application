@@ -27,11 +27,8 @@ $(document).ready(() => {
     let modalLabel = '';
     let movieCard;
 
-  // console.log($("ul.navbar-nav li a").addClass("yellow"));
-
-
   // $("main").html("loading...");
-  // $("main").html(`<img class="loaderImage" src="img/editLoader.gif">`);
+  $("main").html(`<div id="loader-container"><img class="loaderImage" src="img/editLoader.gif"></div>`);
 
     const renderMovieList = (title, rating, id) => {
         let content = `<div class="card">`;
@@ -62,6 +59,7 @@ $(document).ready(() => {
 
     const renderList = (title = "Here are all the movies") => {
         getMovies().then((movieList) => {
+          setTimeout(() => {
             mainContainer().html(title);
             mainContainer().append(`<div id="accordion">`);
             movieList.forEach(({title, rating, id}) => {
@@ -101,6 +99,7 @@ $(document).ready(() => {
                 $('#saveInput').removeClass('btn-warning btn-success').addClass('btn-danger').html('Delete')
             }
             $(".delete-button").click(deleteLabel);
+          },4000);
         }).catch((error) => {
             alert('Oh no! Something went wrong.\nCheck the console for details.');
             console.log(error);

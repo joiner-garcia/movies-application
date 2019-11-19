@@ -47,10 +47,15 @@ html, body {
     margin-left: 3em;
 }
 
+#loader-container {
+    display: flex;
+    justify-content: center;
+}
+
 .loaderImage {
     height: 5em;
     width: 5em;
-    border-radius: 10px;
+    border-radius: 50%;
 }
 
 /*!*Extra small devices (portrait phones, less than 576px)*!*/
