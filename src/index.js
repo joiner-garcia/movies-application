@@ -29,7 +29,6 @@ $(document).ready(() => {
     let allMovies = [];
     let selectedTitle = '';
     let selectedRating;
-    let disabledButtons = [];
 
     // $("main").html("loading...");
     $("main").html(`<div id="loader-container"><img class="loaderImage" src="img/editLoader.gif"></div>`);
@@ -48,10 +47,10 @@ $(document).ready(() => {
         content += `<div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#myGroup">`;
         content += `<div class="movie-content-container card-body">`;
         content += `<div class="movie-description">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>`;
-        content += `<button type="button" id="editButton-${id}" class="edit-button btn btn-warning btn-sm disable-able" data-toggle="modal" data-target="#modal">
+        content += `<button type="button" id="editButton-${id}" class="edit-button btn btn-warning btn-sm" data-toggle="modal" data-target="#modal">
                     Edit
                 </button>`;
-        content += `<button type="button" id="deleteButton-${id}" class="delete-button btn btn-danger btn-sm disable-able" data-toggle="modal" data-target="#modal">
+        content += `<button type="button" id="deleteButton-${id}" class="delete-button btn btn-danger btn-sm" data-toggle="modal" data-target="#modal">
                     Delete
                 </button>`;
         content += `</div>`;
@@ -62,24 +61,22 @@ $(document).ready(() => {
     };
 
     const renderList = (title = "Here are all the movies") => {
+        $(".disable-able").attr("disabled", true);
         getMovies()
             .then((movieList) => {
-                disabledButtons = $(".disable-able");
-                console.log(disabledButtons);
-                // $("#saveInput").attr("disabled", true);
-                // for (let button of disabledButtons) {
-                //     button.attr("disabled", true);
-                // }
                 allMovies = movieList;
                 console.log(allMovies);
                 setTimeout(() => {
                     mainContainer().html(title);
                     mainContainer().append(`<div id="accordion">`);
+                    // console.log($(".disable-able"));
                     movieList.forEach(({title, rating, id}) => {
                         $("#accordion").append(renderMovieList(title, rating, id));
                         //    placeholder if all else fails
                     });
                     mainContainer().append(`</div>`);
+                    console.log($(".disable-able"));
+                    $(".disable-able").removeAttr("disabled");
 
                     function editLabel() {
                         modalLabel = 'Edit Movie';
@@ -124,13 +121,8 @@ $(document).ready(() => {
                     }
 
                     $(".delete-button").click(deleteLabel);
-                }, .5);
+                }, 4000);
             })
-            // .then(() => {
-            //     for (let button of disabledButtons) {
-            //         button.removeAttr("disabled", false);
-            //     }
-            // })
             .catch((error) => {
                 alert('Oh no! Something went wrong.\nCheck the console for details.');
                 console.log(error);
