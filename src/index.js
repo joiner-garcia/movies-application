@@ -73,7 +73,7 @@ $(document).ready(() => {
                 movieCard = $(this).attr("id").split("-")[1];
                 console.log(movieCard);
                 $('#modalLabel').html(modalLabel);
-                $('.modal-body').html(`<form>
+                $('.modalOne').html(`<form>
                             <div class="form-group">
                                 <label for="titleInput" class="col-form-label">Title:</label>
                                 <input type="text" class="form-control" id="titleInput">
@@ -95,7 +95,7 @@ $(document).ready(() => {
                 console.log(movieCard);
                 $('#modalLabel').html(modalLabel);
                 // modalLabel().html('Edit Movie')
-                $('.modal-body').html("Are you sure you want to delete this movie?");
+                $('.modalOne').html("Are you sure you want to delete this movie?");
                 $('#saveInput').removeClass('btn-warning btn-success').addClass('btn-danger').html('Delete')
             }
             $(".delete-button").click(deleteLabel);
@@ -124,7 +124,7 @@ $(document).ready(() => {
 
     $('#addButton').click(() => {
         $('#modalLabel').html('Add Movie');
-        $('.modal-body').html(`<form>
+        $('.modalOne').html(`<form>
                             <div class="form-group">
                                 <label for="titleInput" class="col-form-label">Title:</label>
                                 <input type="text" class="form-control" id="titleInput">
@@ -134,7 +134,7 @@ $(document).ready(() => {
                                 <input type="text" class="form-control" id="ratingInput">
                             </div>
                         </form>`);
-        $('#saveInput').removeClass('btn-warning btn-danger').addClass('btn-success').html('Save Changes');
+        $('#saveInput').removeClass('btn-warning btn-danger').addClass('btn-success').html('Post Movie');
 
     });
 
@@ -205,4 +205,14 @@ $(document).ready(() => {
                 .then((renderList(`Movie list updated: ${udate}`)));
         }
     });
+        let username;
+//    Sign in functionality
+    $('#signInButton').click(() => {
+        if ($('#dropdownFormUsername').val().length < 5) {
+            alert('Your username must contain at least 5 characters')
+        } else {
+            username = $('#dropdownFormUsername').val();
+            $('#userNameDisplay').html(`Signed in as: ${username}`)
+        }
+    })
 });
