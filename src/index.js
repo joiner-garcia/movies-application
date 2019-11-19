@@ -135,7 +135,7 @@ $(document).ready(() => {
                                 <input type="text" class="form-control" id="ratingInput">
                             </div>
                         </form>`);
-        $('#saveInput').removeClass('btn-warning btn-danger').addClass('btn-success')
+        $('#saveInput').removeClass('btn-warning btn-danger').addClass('btn-success').html('Save Changes');
 
     });
 

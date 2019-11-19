@@ -1,17 +1,17 @@
 {
   "movies": [
     {
-      "title": "this movie",
-      "rating": "10",
+      "title": "Interstellar",
+      "rating": "9",
       "id": 1
     },
     {
-      "title": "star wars is lame",
-      "rating": "0",
+      "title": "Cars",
+      "rating": "7",
       "id": 2
     },
     {
-      "title": "this movie",
+      "title": "Tarzan",
       "rating": "10",
       "id": 3
     }
