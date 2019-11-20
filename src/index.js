@@ -27,10 +27,14 @@ $(document).ready(() => {
     let modalLabel = '';
     let movieCard;
     let allMovies = [];
+    // SELECTED EDITABLE MOVIE
     let selectedTitle = '';
     let selectedRating;
-    let jumbotronLoader = `url("img/movieFluid.jpg")`;
-    // let initialLoader = `url("img/movieFluid.jpg")`;
+    // JUMBOTRON IMAGES
+    let loaderJumbotron = `img/giphy.gif`;
+    let splashJumbotron = `img/movieFluid.jpg`;
+    let userJumbotron = `img/userFluid.png`;
+    let currentJumbotron = splashJumbotron;
 
     // $("main").html("loading...");
     $("main").html(`<div id="loader-container"><img class="loaderImage" src="img/editLoader.gif"></div>`);
@@ -65,7 +69,7 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
     };
 
     const renderList = (title = "Here are all the movies") => {
-        $('.jumbotron').css('background-image', 'url("img/giphy.gif")');
+        $('#splashImage').attr("src", loaderJumbotron);
         getMovies()
             .then((movieList) => {
                 allMovies = movieList;
@@ -75,10 +79,10 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
                     mainContainer().append(`<div id="accordion">`);
                     movieList.forEach(({title, rating, id}) => {
                         $("#accordion").append(renderMovieList(title, rating, id));
-                        //    placeholder if all else fails
                     });
                     mainContainer().append(`</div>`);
-                    $('.jumbotron').css('background-image', 'url("img/movieFluid.jpg")');
+
+                    $('#splashImage').attr("src", currentJumbotron);
 
                     function editLabel() {
                         modalLabel = 'Edit Movie';
@@ -91,7 +95,6 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
                             }
                         }
 
-                        // console.log(parseInt(movieCard));
                         $('#modalLabel').html(modalLabel);
                         $('.modalOne').html(`<form>
                             <div class="form-group">
@@ -237,7 +240,9 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
             alert('Your username must contain at least 5 characters')
         } else {
             username = $('#dropdownFormUsername').val();
-            $('#userNameDisplay').html(`Signed in as: ${username}`)
+            $('#userNameDisplay').html(`Signed in as: ${username}`);
+            currentJumbotron = userJumbotron;
+            renderList();
         }
     })
 });
