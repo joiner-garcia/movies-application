@@ -37,7 +37,9 @@ $(document).ready(() => {
     let currentJumbotron = splashJumbotron;
 
     // $("main").html("loading...");
+    // Splash Loader
     $("main").html(`<div id="loader-container"><img class="loaderImage" src="img/editLoader.gif"></div>`);
+    // $("#loadingSection").hide();
 
     const renderMovieList = (title, rating, id) => {
         let content = `<div class="card">`;
@@ -82,6 +84,7 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
                     });
                     mainContainer().append(`</div>`);
                     // Hide movie list for initial start fadeIn
+                  $("#loadingSection").fadeOut(2000);
                     $("#myGroup").hide();
                     $("#myGroup").fadeIn(2000);
 
@@ -173,6 +176,7 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
         // console.log(modalLabel().html());
       // fadeOut the movie list
       $("#myGroup").fadeOut(1000);
+      $("#loadingSection").fadeIn(1000);
         if ($("#modalLabel").html() === "Add Movie") {
             console.log(titleInput().val());
             let something = {
