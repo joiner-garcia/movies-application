@@ -20,7 +20,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand mr-auto text-center" href="#">MovieLog</a>
-<!--    <span class="float-right text-info" id='userNameDisplay'></span>-->
+    <!--    <span class="float-right text-info" id='userNameDisplay'></span>-->
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav d-flex flex-row justify-content-between">
             <li class="nav-item active text-center">
@@ -75,7 +75,9 @@
                             </label>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" id="signInButton" data-toggle="modal" data-target="#loginModal">Sign in</button>
+                    <button type="button" class="btn btn-primary" id="signInButton" data-toggle="modal"
+                            data-target="#loginModal">Sign in
+                    </button>
                 </form>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">New around here? Sign up</a>
@@ -85,11 +87,9 @@
     </div>
 </div>
 
-<!-- JUMBOTRON -->
-<div class="jumbotron jumbotron-fluid landingImage imageSettings m-0">
-<!--    <div class="container.fluid">-->
-<!--        hello-->
-<!--    </div>-->
+<!-- CUSTOM JUMBOTRON -->
+<div class="mainJumbotron ">
+    <img id="splashImage" src="img/giphy.gif" class="imageSettings" alt="running popcorn">
 </div>
 
 <!-- ADD MOVIE MODAL SECTION -->
@@ -140,11 +140,15 @@
 
 <!-- MAIN MOVIE LOG SECTION -->
 <main id="myGroup">
+
     <div class="container">
         <!--        <h1>Hello There!</h1>-->
         <!--        <p>To get started, edit <code>src/index.js</code>.</p>-->
     </div>
 </main>
+<section id="loadingSection" class="loadingSection">
+    <img id="loadingPopcorn" src="img/loadingPopcorn.gif" alt="popping popcorn" class="loadingPopcorn">
+</section>
 
 <!-- BOOTSTRAP SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
