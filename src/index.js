@@ -81,6 +81,9 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
                         $("#accordion").append(renderMovieList(title, rating, id));
                     });
                     mainContainer().append(`</div>`);
+                    // Hide movie list for initial start fadeIn
+                    $("#myGroup").hide();
+                    $("#myGroup").fadeIn(2000);
 
                     $('#splashImage').attr("src", currentJumbotron);
 
@@ -168,6 +171,8 @@ Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richa
 
     $("#saveInput").click(function () {
         // console.log(modalLabel().html());
+      // fadeOut the movie list
+      $("#myGroup").fadeOut(1000);
         if ($("#modalLabel").html() === "Add Movie") {
             console.log(titleInput().val());
             let something = {
