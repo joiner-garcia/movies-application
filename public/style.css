@@ -14,6 +14,7 @@ html, body {
     background-image: url("img/movieFluid.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .movie-content-container {
@@ -60,9 +61,6 @@ html, body {
 li {
     width: 20%
 }
-/*ul {*/
-/*    flex-direction: row;*/
-/*}*/
 
 /*!*Extra small devices (portrait phones, less than 576px)*!*/
 /*!*No media query for `xs` since this is the default in Bootstrap*!*/
